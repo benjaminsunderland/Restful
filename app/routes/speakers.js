@@ -18,7 +18,7 @@ router.get('/speakers', (req, res) => {
       <link rel="stylesheet" type="text/css" href="/css/style.css">
       <h1>Welcome</h1>
       <img src="/images/misc/background.jpg" alt="background" style="height: 300px;">
-
+      <script src="/reload/reload.js"></script>
       <h1>Meetups</h1>
       ${info}
     `)
@@ -35,6 +35,7 @@ router.get('/speakers/:speakerid', (req, res) => {
     <h3>${speaker.name}</h3>
     <img src="/images/speakers/${speaker.shortname}_tn.jpg" alt="speaker"
     <p>${speaker.summary}</p>
+    <script src="/reload/reload.js"></script>
   `)
 })
 
