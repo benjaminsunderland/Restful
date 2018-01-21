@@ -1,29 +1,22 @@
 const express = require('express');
 var router = express.Router();
 
-
 router.get('/speakers', (req, res) => {
-  var info = '';
-  var dataFile = req.app.get('appData')
-  dataFile.speakers.forEach(function(item) {
-    info += `
-    <li>
-      <h2>${item.name}</h2>
-       <img src="/images/speakers/${item.shortname}_tn.jpg" alt="speaker"
-      <p>${item.summary}</p>
-    </li>
-    `;
-  })
-  res.send(`
-      <link rel="stylesheet" type="text/css" href="/css/style.css">
-      <h1>Welcome</h1>
-      <img src="/images/misc/background.jpg" alt="background" style="height: 300px;">
-      <script src="/reload/reload.js"></script>
-      <h1>Meetups</h1>
-      ${info}
-    `)
-})
+  var data = req.app.get('appData');
+  var pagePhotos = [];
+  var pageSpeakers = data.speakers;
 
+  data.speakers.forEach(function(item) {
+    pagePhotos = pagePhotos.concat(item.artwork);
+  })
+
+  res.render('speakers', {
+    pageTitle: "Speakers",
+    artwork: pagePhotos,
+    speakers: pageSpeakers,
+    pageId: "speakers"
+  });
+});
 
 router.get('/speakers/:speakerid', (req, res) => {
  var dataFile = req.app.get('appData')
